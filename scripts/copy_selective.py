@@ -39,7 +39,7 @@ def copy_selective_users():
         target = create_engine(f"sqlite:///{target_db_path}")
         
         # Test database connections
-        print("\n📡 Testing database connections...")
+        print("\n Testing database connections...")
         with source.connect() as conn:
             conn.execute(text("SELECT 1"))
         print("Source database connection successful")
@@ -148,7 +148,7 @@ def copy_selective_users():
             print("Continuing with users table only...")
         
         # Step 3: Verification
-        print(f"\n🔍 Step 3: Verification...")
+        print(f"\n Step 3: Verification...")
         
         # Check what tables were created in target
         target_inspector = inspect(target)
@@ -163,7 +163,7 @@ def copy_selective_users():
                 count = count_df.iloc[0]['count']
                 print(f"{table}: {count} rows")
         
-        print(f"\n🎉 Selective copy operation completed successfully!")
+        print(f"\n Selective copy operation completed successfully!")
         print(f"Completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         
         return True
@@ -192,7 +192,7 @@ def view_copied_data():
         # Show users_partial table
         try:
             users_df = pd.read_sql("SELECT * FROM users_partial", target)
-            print(f"\n👥 Users Partial Table ({len(users_df)} rows):")
+            print(f"\n Users Partial Table ({len(users_df)} rows):")
             print(users_df.to_string(index=False))
         except Exception as e:
             print(f"No users_partial table found: {e}")

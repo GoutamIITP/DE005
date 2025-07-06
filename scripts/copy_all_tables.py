@@ -44,7 +44,7 @@ def copy_all_tables():
                 conn.execute(text("SELECT 1"))
             print("Target database connection successful")
         except Exception as e:
-            print(f"❌ Error connecting to target database: {e}")
+            print(f"Error connecting to target database: {e}")
             return False
         
         # Get all tables from source database
