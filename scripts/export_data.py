@@ -101,14 +101,14 @@ def export_joined_table():
             writer(out, parse_schema(schema), records)
         print(f"Avro exported to: {avro_path}")
 
-        print(f"✅ {base_name} exported successfully to CSV, Parquet, and Avro in: {output_dir}")
+        print(f"{base_name} exported successfully to CSV, Parquet, and Avro in: {output_dir}")
         
         # List files in output directory for verification
         files_in_output = os.listdir(output_dir)
         print(f"Files in output directory: {files_in_output}")
         
     except Exception as e:
-        print(f"❌ Error in export_joined_table: {e}")
+        print(f"Error in export_joined_table: {e}")
         import traceback
         traceback.print_exc()
         raise

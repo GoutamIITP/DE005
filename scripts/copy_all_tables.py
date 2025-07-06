@@ -20,7 +20,7 @@ def copy_all_tables():
     
     # Check if source database exists
     if not os.path.exists(source_db_path):
-        print(f"❌ Error: Source database not found at {source_db_path}")
+        print(f" Error: Source database not found at {source_db_path}")
         print("Please ensure the dummy.db file exists in the current directory")
         return False
     
@@ -33,16 +33,16 @@ def copy_all_tables():
         try:
             with source.connect() as conn:
                 conn.execute(text("SELECT 1"))
-            print("✅ Source database connection successful")
+            print(" Source database connection successful")
         except Exception as e:
-            print(f"❌ Error connecting to source database: {e}")
+            print(f"Error connecting to source database: {e}")
             return False
         
         # Test target database connection
         try:
             with target.connect() as conn:
                 conn.execute(text("SELECT 1"))
-            print("✅ Target database connection successful")
+            print("Target database connection successful")
         except Exception as e:
             print(f"❌ Error connecting to target database: {e}")
             return False
@@ -52,7 +52,7 @@ def copy_all_tables():
         tables = inspector.get_table_names()
         
         if not tables:
-            print("⚠️  No tables found in source database")
+            print(" No tables found in source database")
             return True
         
         print(f"Found {len(tables)} tables to copy: {tables}")
@@ -71,22 +71,22 @@ def copy_all_tables():
                 
                 # Write data to target table
                 df.to_sql(table, target, if_exists='replace', index=False)
-                print(f"  - ✅ Successfully copied {table} ({len(df)} rows)")
+                print(f"Successfully copied {table} ({len(df)} rows)")
                 
                 copied_count += 1
                 
             except Exception as e:
-                print(f"  - ❌ Failed to copy table {table}: {e}")
+                print(f" Failed to copy table {table}: {e}")
                 failed_count += 1
                 continue
         
         # Summary
-        print(f"\n📊 Copy Summary:")
-        print(f"✅ Successfully copied: {copied_count} tables")
-        print(f"❌ Failed to copy: {failed_count} tables")
+        print(f"\n Copy Summary:")
+        print(f" Successfully copied: {copied_count} tables")
+        print(f"Failed to copy: {failed_count} tables")
         
         if copied_count > 0:
-            print(f"✅ Database copied successfully to {target_db_path}")
+            print(f"Database copied successfully to {target_db_path}")
             
             # Verify the target database
             target_inspector = inspect(target)
@@ -96,7 +96,7 @@ def copy_all_tables():
         return failed_count == 0
         
     except Exception as e:
-        print(f"❌ Unexpected error during copy operation: {e}")
+        print(f"Unexpected error during copy operation: {e}")
         traceback.print_exc()
         return False
 
@@ -106,6 +106,6 @@ if __name__ == "__main__":
     success = copy_all_tables()
     
     if success:
-        print("\n🎉 Database copy completed successfully!")
+        print("\n Database copy completed successfully!")
     else:
-        print("\n💥 Database copy failed. Please check the errors above.")
+        print("\n Database copy failed. Please check the errors above.")
